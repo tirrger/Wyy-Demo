@@ -118,7 +118,7 @@ export default {
       
         //  console.log(musicUrl);
          this.$parent.musicUrl = musicUrl
-         this.$parent.list.push(musicUrl)
+        //  this.$parent.list.push(musicUrl)
     },
     //推荐Mv
     async  tjMv(){

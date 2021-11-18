@@ -25,14 +25,14 @@
         >
           <td>{{ index }}</td>
           <td>
-            <div class="img-wrap">
+            <div class="img-wrap" @click="getUrl(item.id)">
               <img :src="item.album.picUrl" alt="" />
               <span class="iconfont icon-play"></span>
             </div>
           </td>
           <td>
             <div class="song-wrap">
-              <div class="name-wrap">
+              <div class="name-wrap" >
                 <span>{{ item.album.name }}</span>
                 <span class="iconfont icon-mv"></span>
               </div>
@@ -89,6 +89,17 @@ export default {
         }
         this.songsList[i].duration = `${min}:${sec}`;
       }
+    },
+    async getUrl(id){
+         let musicUrl =  `https://music.163.com/song/media/outer/url?id=${id}.mp3`
+         const result  = await this.$axios({
+           url:'/song/url',
+      })
+        console.log(result);
+      
+        //  console.log(musicUrl);
+         this.$parent.musicUrl = musicUrl
+        //  this.$parent.list.push(musicUrl)
     },
   },
   watch:{

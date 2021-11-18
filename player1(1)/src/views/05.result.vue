@@ -22,8 +22,8 @@
             >
               <td>{{ index + 1 }}</td>
               <td>
-                <div class="song-wrap">
-                  <div class="name-wrap">
+                <div class="song-wrap" >
+                  <div class="name-wrap" @click="getUrl(item.id)">
                     <span>{{ item.name }}</span>
                     <span class="iconfont icon-mv" v-if="item.mvid != 0"></span>
                   </div>
@@ -170,6 +170,17 @@ export default {
           console.log("err==>", err);
         });
     },
+      async getUrl(id){
+         let musicUrl =  `https://music.163.com/song/media/outer/url?id=${id}.mp3`
+         const result  = await this.$axios({
+           url:'/song/url',
+      })
+        console.log(result);
+      
+        //  console.log(musicUrl);
+         this.$parent.musicUrl = musicUrl
+        //  this.$parent.list.push(musicUrl)
+    },
   },
   watch: {
     activeIndex() {
@@ -211,7 +222,9 @@ export default {
    
   },
   updated (){
-    this.query = this.$route.query.q
+    this.query = this.$route.query.q;
+       this.serch();
+
   },
   
   //将播放时间进行格式化处理
